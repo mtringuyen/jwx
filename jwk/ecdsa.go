@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/keybase/go-crypto/brainpool"
 	"github.com/lestrrat-go/blackmagic"
 	"github.com/lestrrat-go/jwx/v2/internal/base64"
 	"github.com/lestrrat-go/jwx/v2/internal/ecutil"
@@ -17,6 +18,7 @@ func init() {
 	ecutil.RegisterCurve(elliptic.P256(), jwa.P256)
 	ecutil.RegisterCurve(elliptic.P384(), jwa.P384)
 	ecutil.RegisterCurve(elliptic.P521(), jwa.P521)
+	ecutil.RegisterCurve(brainpool.P256r1(), jwa.BP256)
 }
 
 func (k *ecdsaPublicKey) FromRaw(rawKey *ecdsa.PublicKey) error {

@@ -11,6 +11,42 @@ import (
 
 func TestEllipticCurveAlgorithm(t *testing.T) {
 	t.Parallel()
+	t.Run(`accept jwa constant BP256`, func(t *testing.T) {
+		t.Parallel()
+		var dst jwa.EllipticCurveAlgorithm
+		if !assert.NoError(t, dst.Accept(jwa.BP256), `accept is successful`) {
+			return
+		}
+		if !assert.Equal(t, jwa.BP256, dst, `accepted value should be equal to constant`) {
+			return
+		}
+	})
+	t.Run(`accept the string BP-256`, func(t *testing.T) {
+		t.Parallel()
+		var dst jwa.EllipticCurveAlgorithm
+		if !assert.NoError(t, dst.Accept("BP-256"), `accept is successful`) {
+			return
+		}
+		if !assert.Equal(t, jwa.BP256, dst, `accepted value should be equal to constant`) {
+			return
+		}
+	})
+	t.Run(`accept fmt.Stringer for BP-256`, func(t *testing.T) {
+		t.Parallel()
+		var dst jwa.EllipticCurveAlgorithm
+		if !assert.NoError(t, dst.Accept(stringer{src: "BP-256"}), `accept is successful`) {
+			return
+		}
+		if !assert.Equal(t, jwa.BP256, dst, `accepted value should be equal to constant`) {
+			return
+		}
+	})
+	t.Run(`stringification for BP-256`, func(t *testing.T) {
+		t.Parallel()
+		if !assert.Equal(t, "BP-256", jwa.BP256.String(), `stringified value matches`) {
+			return
+		}
+	})
 	t.Run(`accept jwa constant Ed25519`, func(t *testing.T) {
 		t.Parallel()
 		var dst jwa.EllipticCurveAlgorithm
@@ -287,6 +323,7 @@ func TestEllipticCurveAlgorithm(t *testing.T) {
 	t.Run(`check list of elements`, func(t *testing.T) {
 		t.Parallel()
 		var expected = map[jwa.EllipticCurveAlgorithm]struct{}{
+			jwa.BP256:   {},
 			jwa.Ed25519: {},
 			jwa.Ed448:   {},
 			jwa.P256:    {},

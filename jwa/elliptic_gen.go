@@ -13,6 +13,7 @@ type EllipticCurveAlgorithm string
 
 // Supported values for EllipticCurveAlgorithm
 const (
+	BP256                EllipticCurveAlgorithm = "BP-256"
 	Ed25519              EllipticCurveAlgorithm = "Ed25519"
 	Ed448                EllipticCurveAlgorithm = "Ed448"
 	InvalidEllipticCurve EllipticCurveAlgorithm = "P-invalid"
@@ -24,6 +25,7 @@ const (
 )
 
 var allEllipticCurveAlgorithms = map[EllipticCurveAlgorithm]struct{}{
+	BP256:   {},
 	Ed25519: {},
 	Ed448:   {},
 	P256:    {},

@@ -146,6 +146,10 @@ func _main() error {
 					name:  `X448`,
 					value: `X448`,
 				},
+				{
+					name:  `BP256`,
+					value: `BP-256`,
+				},
 			},
 		},
 		{
